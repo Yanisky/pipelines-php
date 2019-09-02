@@ -37,5 +37,14 @@ steps:
   displayName: 'Environment setup'
 
 - script: |
-    vendor/bin/phpunit
+    vendor/bin/phpunit --log-junit tests/Reports/TEST-phpunit-junit.xml
   displayName: 'Running PHP Tests'
+
+# Publish Test Results to Azure Pipelines/TFS
+- task: PublishTestResults@2
+  inputs:
+    testRunner: 'JUnit'
+    testResultsFiles: 'TEST-phpunit-junit.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)/tests/Reports'
+    mergeTestResults: false 
+  condition: always()
