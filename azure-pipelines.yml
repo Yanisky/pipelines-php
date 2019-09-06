@@ -48,10 +48,12 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)/tests/Reports'
     mergeTestResults: false 
   condition: always()
+
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    rootFolderOrFile: '$(system.defaultWorkingDirectory)'
+    includeRootFolder: false
+    #archiveType: 'zip'
+    #archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    #replaceExistingArchive: true
+- task: PublishBuildArtifacts@1
